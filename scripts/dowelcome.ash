@@ -1,6 +1,18 @@
 import zlib.ash;
 
-string welcome = "Welcome to the Guardians of the Six Pack, I'm DeGrassi, an officer of the Six Pack\n\nI'd also like to take this time to introduce you to our glorious leaders Enzo, or Lord Enzo, Major Meat and Ertest1 in chat (all his alt characters), however you can always just call him Enzo. The rest of us do!\n\nBig Jilm is currently our co-leader and also super helpful.\n\nNow that you're in the clan all we need from you to confirm you membership and give you full privileges and dungeon access is a 'clan title' just a brief phrase or statement about yourself or your character that we can set on you to indicate that you're active. It can be anything that comes to mind trust me that thing you're thinking of right now will be perfect!\n\nIf you need any help with the clan or the game in general please feel free to ask us in clan chat! Hope to see you there soon!";
+string welcome_msg()
+{
+  string gosp_welcome = get_property("gosp_welcome");
+  if (gosp_welcome == "")
+  {
+    string gosp_me = get_property("gosp_me");
+    if (gosp_me == "") gosp_me = my_name();
+
+    gosp_welcome = "Welcome to the Guardians of the Six Pack, I'm " + gosp_me + ", an officer of the Six Pack\n\nI'd also like to take this time to introduce you to our glorious leaders Enzo, or Lord Enzo, Major Meat and Ertest1 in chat (all his alt characters), however you can always just call him Enzo. The rest of us do!\n\nBig Jilm is currently our co-leader and also super helpful.\n\nNow that you're in the clan all we need from you to confirm you membership and give you full privileges and dungeon access is a 'clan title' just a brief phrase or statement about yourself or your character that we can set on you to indicate that you're active. It can be anything that comes to mind - trust me that thing you're thinking of right now will be perfect!\n\nIf you need any help with the clan or the game in general please feel free to ask us in clan chat! Hope to see you there soon!";
+
+  }
+  return gosp_welcome;
+}
 
 void new_member(string player)
 {
@@ -13,7 +25,7 @@ void new_member(string player)
   url = replace_string(url, "^", id);
   url = replace_string(url, "*", title);
   print("Welcoming player '" + player + "' to the clan with a kmail.");
-  kmail(id, welcome, 0);
+  kmail(id, welcome_msg(), 0);
   print("Changing their title to: " + title);
   visit_url(url);
 }
